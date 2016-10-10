@@ -1,0 +1,223 @@
+/* color varible */
+$bus-info-bg:#389CFF;
+$bus-info-road:#2d90f2;
+$bus-info-color:#fff;
+
+/* container size varible */
+$container-width:538px;
+$container-min-height:247px;
+
+/* inner container Top left/Right size */
+$infoLeft-width:98px;
+$infoRight-width:440px;
+$busInfo-min-height:103px;
+
+/* inner container Top left  --road div size */
+$busInfo-road-width:68px;
+$busInfo-road-height:22px;
+
+/* inner container Bottom size */
+$busStop-min-height:144px;
+
+
+/* four font-size in html  */
+/* inner container Top left :biggest bus number , bus road   */
+$bus-info-left:48px;
+$bus-info-road-font-size:16px;
+
+/*  bus from -to   */
+$bus-info-right:24px;
+
+
+/* other description font */
+$bus-other:13px;
+
+/* for confirm the size of box */
+@mixin box-size
+{
+	box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+
+/* for clean float */
+@mixin clear
+{
+	content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+/*  the biggest contanier */
+.bus-template
+{
+	margin:0 auto;
+	margin-top:20px;
+	position:relative;
+	width: $container-width;
+	min-height:	$container-min-height;
+	@include box-size;
+
+}
+
+/* inner container Top part */
+.bus-info
+{
+	background-color:$bus-info-bg;
+	min-height:$busInfo-min-height;
+	color:$bus-info-color;
+	@include box-size;
+	position:relative;
+	.info-left
+	{
+		width:$infoLeft-width;
+		height:$busInfo-min-height;
+		text-align:center;
+		@include box-size;
+		float:left;
+		font-size: $bus-info-left;
+		padding:12px;
+		.path-road
+		{
+		    width:$busInfo-road-width;
+		    height:$busInfo-road-height;
+		    line-height:20px;
+			position:absolute;
+			bottom: 16px;
+    		left: 16px;
+			background-color:$bus-info-road;
+			font-size:$bus-info-road-font-size;
+		}
+	}
+	.info-right
+	{
+		width:$infoRight-width;
+		height:$busInfo-min-height;
+		@include box-size;
+		float:left;
+		padding-top:12px;
+		.table-td
+		{
+		 white-space:nowrap;
+		 table-layout:fixed;
+		}
+		.info-first
+		{
+		/* need to be adjust manually */
+			padding:0;
+		}
+		.info-from-to
+		{
+			font-size:$bus-info-right;
+		}
+		.info-dec
+		{
+			height: 20px;
+			background: url(../map_bus_1.png) no-repeat;
+			background-position: 0 5px;
+			vertical-align: top;
+		}
+		.info-price
+		{
+			margin-left:30px;
+			margin-right:15px;
+		}
+		a
+		{
+			color:$bus-info-color;
+		}
+		.reverse-path
+		{
+		    position: absolute;
+		    top: 20px;
+    		right: 14px;
+		    width: 32px;
+		    height: 18px;
+		   
+		    background-color: #389cff;
+		    padding-left: 24px;
+		    cursor: pointer;
+		    background: url(../map_bus_1.png) no-repeat;
+		    background-position: -83px 4px;
+		    border: 1px solid #fff;
+		}
+	}
+}
+
+.bus-info:after
+{
+	@include clear;
+}
+
+/* div rotate starts  */
+.bus-div
+{
+	position:absolute;
+	top:0;
+	left:0;
+	backface-visibility: hidden;
+	transition: all 1s linear;
+}
+.bus-front
+{
+	z-index: 2;
+}
+.bus-back
+{
+	transform: rotateY(180deg);
+	z-index: 1;
+}
+.bus-back-click
+{
+	transform: rotateY(360deg);
+	z-index: 3;
+}
+.bus-front-click
+{
+	transform: rotateY(180deg);
+}
+/* div rotate ends  */
+
+/* inner container Bottom part */
+.bus-stop
+{
+	min-height:$busStop-min-height;
+	@include box-size;
+	border:2px solid $bus-info-bg;
+	ul
+	{
+		list-style: none;
+	    margin: 12px 0px 12px 12px;
+	    overflow: hidden;
+	    padding: 0;
+		li
+		{
+			 float:left;
+			 width: 25px;
+		    height: 132px;
+		    text-align: center;
+		    line-height: 14px;
+		    cursor: pointer;
+		    word-break: normal;
+		    font-size: 13px;
+		    a{
+		    text-decoration:none;
+		    color:#333;
+		    }
+		    .span-arrow
+		    {
+		    	display: inline-block;
+			    width: 24px;
+			    height: 12px;
+			    background: url(../map_bus_1.png) no-repeat 6px -167px;
+			    margin-top: 2px;
+		    }
+		}
+	}
+}
+.bus-stop:after
+{
+	@include clear;
+}
